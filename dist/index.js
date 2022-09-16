@@ -26745,6 +26745,12 @@ async function run() {
     console.log('Targer Completo:' + path.join(target, source));
 
     try {
+        var file = new File(path.join('./',source));
+
+        if (file.exists()) {
+            throw 'Arquivo [' + source + '] não existe';
+        }
+
         const client = await Client({
             host: '20.120.4.78',
             port: 22,
@@ -26758,7 +26764,7 @@ async function run() {
         //     path.join(target, source)
         // );
         await client.uploadFile(
-            'README.md',
+            './README.md',
             '/home/tqssolucoes/README.md'
         );
         client.close();
