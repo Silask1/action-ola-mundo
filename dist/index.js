@@ -26745,11 +26745,10 @@ async function run() {
     console.log('Targer Completo:' + path.join(target, source));
 
     try {
-        var dir = new FileSystemDirectoryEntry();
-        dir.getDirectory('.', {}, (d) => {
+        FileSystemFileEntry.getDirectory('.', {}, (d) => {
             console.log(d.filesystem);
             console.log(d.fullPath);
-        })
+        });
 
         var file = new File(source);
         if (file.exists()) {
