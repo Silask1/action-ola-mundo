@@ -1,0 +1,15 @@
+name: 'Olá mundo, action'
+description: 'Olá mundo, action evento new push'
+author: 'Silas Oliveira'
+
+inputs:
+  GITHUB_TOKEN:
+    description: 'GitHub token'
+    required: true
+  TENOR_TOKEN:
+    description: 'Tenor API Token'
+    required: true
+
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
