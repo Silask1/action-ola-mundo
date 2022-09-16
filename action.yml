@@ -3,12 +3,14 @@ description: 'Olá mundo, action evento new push'
 author: 'Silas Oliveira'
 
 inputs:
-  GITHUB_TOKEN:
-    description: 'GitHub token'
+  source:
     required: true
-  TENOR_TOKEN:
-    description: 'Tenor API Token'
+    type: string
+    description: Lista de Arquivos para copiar
+  target:
     required: true
+    type: string
+    description: Diretório de desinto do Servidor
 
 runs:
   using: 'node12'

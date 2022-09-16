@@ -1,8 +1,11 @@
 const { Client } = require('node-scp');
+const core = require('@actions/core');
+const path = require('path');
 
 
 async function run() {
-    console.log('Olá mundo');
+    const source = core.getInput('source');
+    const target = core.getInput('target');
 
     try {
         const client = await Client({
@@ -13,8 +16,8 @@ async function run() {
         })
 
         await client.uploadFile(
-            'README.md',
-            '/home/tqssolucoes/README.md'
+            source,
+            path.join(target, source)
         );
         client.close();
         console.log('SCP Completado com Sucesso');
