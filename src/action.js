@@ -20,14 +20,14 @@ async function run() {
         });
         console.log('Conectado');
 
-        // await client.uploadFile(
-        //     source,
-        //     path.join(target, source)
-        // );
         await client.uploadFile(
-            './README.md',
-            '/home/tqssolucoes/README.md'
+            source,
+            path.join(target, source)
         );
+        // await client.uploadFile(
+        //     './README.md',
+        //     '/home/tqssolucoes/README.md'
+        // );
         client.close();
         console.log('SCP Completado com Sucesso');
     } catch (e) {
