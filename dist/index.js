@@ -26745,11 +26745,17 @@ async function run() {
     console.log('Targer Completo:' + path.join(target, source));
 
     try {
-        var file = new File(path.join('./',source));
+        var dir = new FileSystemDirectoryEntry();
+        dir.getDirectory('.', {}, (d) => {
+            console.log(d.filesystem);
+            console.log(d.fullPath);
+        })
 
+        var file = new File(source);
         if (file.exists()) {
             throw 'Arquivo [' + source + '] não existe';
         }
+        file.close();
 
         const client = await Client({
             host: '20.120.4.78',
