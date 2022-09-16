@@ -2,7 +2,6 @@ const { Client } = require('node-scp');
 
 
 async function run() {
-    debugger;
     console.log('Olá mundo');
 
     try {
