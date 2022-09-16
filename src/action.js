@@ -4,8 +4,12 @@ const path = require('path');
 
 
 async function run() {
-    const source = core.getInput('source');
-    const target = core.getInput('target');
+    const source = core.getInput('source', { required: true });
+    const target = core.getInput('target', { required: true });
+
+    console.log('Source: ' + source);
+    console.log('Target:' + target);
+    console.log('Targer Completo:' + path.join(target, source));
 
     try {
         const client = await Client({
@@ -13,7 +17,8 @@ async function run() {
             port: 22,
             username: 'tqssolucoes',
             password: 'Usrtqs8774636'
-        })
+        });
+        console.log('Conectado');
 
         await client.uploadFile(
             source,
