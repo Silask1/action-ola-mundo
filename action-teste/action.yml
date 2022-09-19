@@ -1,0 +1,7 @@
+name: Teste de Actions
+description: 'Teste de Actions'
+author: 'Silas Oliveira'
+  
+runs:
+  using: 'node12'
+  main: 'dist/index.ts'
