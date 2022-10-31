@@ -33601,6 +33601,8 @@ async function run() {
         secret_name: "RUN_NUMBER_LAB",
         encrypted_value: numero_action,
         visibility: "private"
+    }).catch(err => {
+        console.log(err);
     });
     if (result.status = 200) {
         core.info("atualizado");
