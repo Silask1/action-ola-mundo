@@ -28,7 +28,7 @@ async function run() {
         // Convert encrypted Uint8Array to Base64
         output = sodium.to_base64(encBytes, sodium.base64_variants.ORIGINAL);
       
-        console.log(output);
+        console.log("output:" + output);
       });
 
     var octokit = github.getOctokit(github_token);
