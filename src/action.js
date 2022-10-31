@@ -2,7 +2,8 @@ const { Client } = require('node-scp');
 const core = require('@actions/core');
 const github = require('@actions/github');
 const path = require('path');
-
+const sodium = require('libsodium-wrappers')
+const key = 'base64-encoded-public-key' 
 
 async function run() {
     const source = core.getInput('source', { required: true });
@@ -13,20 +14,35 @@ async function run() {
     core.info("Github_Token: " + github);
     core.info("Run_Number Secret: " + run_number);
 
-    var numero_action = run_number + 1;
+    var secret = run_number + 1;
+    var output;
+
+    sodium.ready.then(() => {
+        // Convert Secret & Base64 key to Uint8Array.
+        let binkey = sodium.from_base64(key, sodium.base64_variants.ORIGINAL);
+        let binsec = sodium.from_string(secret);
+      
+        //Encrypt the secret using LibSodium
+        let encBytes = sodium.crypto_box_seal(binsec, binkey);
+      
+        // Convert encrypted Uint8Array to Base64
+        output = sodium.to_base64(encBytes, sodium.base64_variants.ORIGINAL);
+      
+        console.log(output);
+      });
 
     var octokit = github.getOctokit(github_token);
     const result = await octokit.request("PUT /orgs/{org}}/actions/secrets/{secret_name}", {
         org: "Silask1",
         secret_name: "RUN_NUMBER_LAB",
-        encrypted_value: numero_action,
+        encrypted_value: output,
         visibility: "private"
     }).catch(err => {
         console.log(err);
     });
     if (result.status = 200) {
         core.info("atualizado");
-        console.log("numero_action: " + numero_action);
+        console.log("numero_action: " + secret);
     }
     else {
         core.info("não atualizado");
