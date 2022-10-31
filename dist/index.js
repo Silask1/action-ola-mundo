@@ -33588,12 +33588,25 @@ async function run() {
     const source = core.getInput('source', { required: true });
     const target = core.getInput('target', { required: true });
     const github_token = core.getInput('github_token', { required: true});
-    const run_number = core.getInput('run_number', {required: true})
+    var run_number = core.getInput('run_number', {required: true})
 
     core.info("Github_Token: " + github);
     core.info("Run_Number Secret: " + run_number);
 
-    //var octokit = github.getOctokit(github_token);
+    run_number = run_number + 1;
+
+    var octokit = github.getOctokit(github_token);
+    const result = await octokit.request("PUT /orgs/{org}}/actions/secrets/{secret_name}", {
+        org: "Silask1",
+        secret_name: "RUN_NUMBER_LAB",
+        visibility: "private"
+    });
+    if (result.status = 200) {
+        core.info("atualizado");
+    }
+    else {
+        core.info("não atualizado");
+    }
 
     // console.log('Source: ' + source);
     // console.log('Target:' + target);
