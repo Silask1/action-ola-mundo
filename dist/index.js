@@ -33593,16 +33593,18 @@ async function run() {
     core.info("Github_Token: " + github);
     core.info("Run_Number Secret: " + run_number);
 
-    run_number = run_number + 1;
+    var numero_action = run_number + 1;
 
     var octokit = github.getOctokit(github_token);
     const result = await octokit.request("PUT /orgs/{org}}/actions/secrets/{secret_name}", {
         org: "Silask1",
         secret_name: "RUN_NUMBER_LAB",
+        encrypted_value: numero_action,
         visibility: "private"
     });
     if (result.status = 200) {
         core.info("atualizado");
+        console.log("numero_action: " + numero_action);
     }
     else {
         core.info("não atualizado");
