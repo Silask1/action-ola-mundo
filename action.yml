@@ -11,11 +11,11 @@ inputs:
     required: true
     type: string
     description: Diretório de desinto do Servidor
+  run_number:
+    required: true
   github_token:
     required: true
     type: string
-  run_number:
-    required: true
 
 runs:
   using: 'node12'
