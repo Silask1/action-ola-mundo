@@ -33590,6 +33590,7 @@ async function run() {
     const github_token = core.getInput('github_token', { required: true});
     const run_number = core.getInput('run_number', {required: true})
 
+    core.info("Github_Token: " + github);
     core.info("Run_Number Secret: " + run_number);
 
     //var octokit = github.getOctokit(github_token);
